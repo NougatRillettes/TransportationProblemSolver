@@ -23,11 +23,11 @@ if delta > 0:
     m +=1
 
 print(n,m)
-for i in x:
-    print(i,end=' ')
+for (k,v) in enumerate(x):
+    print(2*k,v,end=' ',sep=':')
 print()
-for i in y:
-    print(i,end=' ')
+for (k,v) in enumerate(y):
+    print(2*k+1,v,end=' ',sep=':')
 print()
 for _ in range(n):
     for _ in range(m):

@@ -23,6 +23,7 @@ typedef struct MatrixEntry {
 
 typedef struct AgentJobEntry {
 	bool marked;
+	uint64_t tag;
 	uint64_t discr; //discrepancy
 } AJ_Entry;
 
@@ -253,12 +254,20 @@ int main(int argc, char * argv[]) {
 	}
 	uint64_t agents_sum = 0;
 	for(size_t i = 0; i < n; i++) {
+#ifdef LEGACY 
 		fscanf(f," %ld ",&input.agents[i].discr);
+#else
+		fscanf(f," %ld:%ld ",&input.agents[i].tag,&input.agents[i].discr);
+#endif
 		agents_sum += input.agents[i].discr;
 	}
 	uint64_t jobs_sum = 0;
 	for(size_t i = 0; i < m; i++) {
+#ifdef LEGACY 
 		fscanf(f," %ld ",&input.jobs[i].discr);
+#else
+		fscanf(f," %ld:%ld ",&input.jobs[i].tag,&input.jobs[i].discr);
+#endif
 		jobs_sum += input.jobs[i].discr;
 	}
 	if (jobs_sum != agents_sum) {
@@ -287,5 +296,14 @@ int main(int argc, char * argv[]) {
 			cost += input.matrix[i][j].init_cost * input.matrix[i][j].quota;
 		}
 	}
-	printf("Minimum cost: %ld",cost);
+	printf("Minimum cost: %ld\n",cost);
+#ifndef LEGACY
+	for (size_t i = 0; i < input.height; i++) {
+		for (size_t j = 0; j < input.width; j++) {
+			if (input.matrix[i][j].quota != 0) {
+				printf("%ld %ld %ld\n", input.agents[i].tag, input.jobs[j].tag, input.matrix[i][j].quota);
+			}
+		}
+	}
+#endif
 }
