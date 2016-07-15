@@ -23,7 +23,7 @@ typedef struct MatrixEntry {
 
 typedef struct AgentJobEntry {
 	bool marked;
-	uint64_t tag;
+	uint64_t tag; //An arbitrary tag given to each agent or job
 	uint64_t discr; //discrepancy
 } AJ_Entry;
 
@@ -35,14 +35,12 @@ typedef struct Instance {
 	AJ_Entry* const jobs; //columns
 } Instance;
 
-void step1(Instance * const input);
-void step2(Instance * const input,const size_t i, const size_t j);
-void step3(Instance * const input);
+// Printing functions
+// ------------------
 
 #define NUMLENGTH 3
 #define NUMLENGTHSTR "3"
 void print_inst(Instance const * const input) {
-#if 0
 	for(int i = 0; i < NUMLENGTH + 0; i++)
 		putchar(' ');
 	putchar('|');
@@ -70,8 +68,15 @@ void print_inst(Instance const * const input) {
 	}
 	putchar('\n');
 	putchar('\n');
-#endif
 }
+
+// Core logic
+// ----------
+
+void step1(Instance * const input);
+void step2(Instance * const input,const size_t i, const size_t j);
+void step3(Instance * const input);
+
 
 void step1(Instance * const input) {
 	bool something_changed = true;
@@ -231,6 +236,8 @@ bool done(Instance const * const input) {
 	}
 	return true;
 }
+
+
 
 
 int main(int argc, char * argv[]) {
