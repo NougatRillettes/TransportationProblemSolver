@@ -37,8 +37,8 @@ space separated list of <tag of job type j>:<number of jobs of type j>
 
 For example, if there is:
 
-	- 2 types of agents tagged 42 and 1337, where the first type has 5 agents, and the second 3 agents.
-	- 3 types of jobs tagged 1, 2, 3 with the following number of jobs: 4, 2, 2
+- 2 types of agents tagged 42 and 1337, where the first type has 5 agents, and the second 3 agents.
+- 3 types of jobs tagged 1, 2, 3 with the following number of jobs: 4, 2, 2
 
 The input would be (with an arbitrary cost matrix):
 
